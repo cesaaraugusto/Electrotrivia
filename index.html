@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="mm95avbq.png" />
+    <link href="styles.css" rel="stylesheet" />
+    <title>ElectroTribia | Pregunta 1</title>
+    <script>
+      // Esperar a que el contenido del DOM se cargue
+      document.addEventListener("DOMContentLoaded", function () {
+        // Variable que indica si el usuario ya ha respondido a esta pregunta
+        let Contestado = 0;
+        let miDiv = document.getElementById("miDiv");
+
+        // Obtener todos los elementos con la clase "correcto"
+        let corrects = document.querySelectorAll(".correcto");
+        // Añadir event listeners a cada botón con la clase "correcto"
+        corrects.forEach((correcto) => {
+          correcto.addEventListener("click", function () {
+            if (Contestado === 0) {
+              // Establecer el color de fondo a verde
+              correcto.style.border = "2.5px solid green";
+              // Ir al elemento padre del botón "correcto" y encontrar el primer elemento con la clase "feedback"
+              correcto.parentElement.querySelector(".feedback").innerHTML =
+                "Correcto!";
+              document.querySelector("p.feedback").style.color = "green";
+              Contestado = 1;
+              // Crear un nuevo enlace para continuar a la siguiente pregunta
+              var Continuar = document.createElement("a");
+              Continuar.innerHTML = "Siguiente pregunta";
+              Continuar.setAttribute("id", "mienlace");
+              Continuar.setAttribute("href", "pregunta2.html");
+              botonera.appendChild(Continuar);
+            }
+          });
+        });
+
+        // Cuando se hace clic en cualquier respuesta incorrecta, cambiar el color a rojo
+        let incorrects = document.querySelectorAll(".incorrecto");
+        incorrects.forEach((incorrecto) => {
+          incorrecto.addEventListener("click", function () {
+            if (Contestado === 0) {
+              // Establecer el color de fondo a rojo
+              incorrecto.style.border = "2.5px solid red";
+              // Encontrar el botón "correcto" correspondiente y establecer su color de fondo a verde
+              let correcto =
+                incorrecto.parentElement.querySelector(".correcto");
+              correcto.style.border = "2.5px solid green";
+              // Ir al elemento padre del botón "incorrecto" y encontrar el primer elemento con la clase "feedback"
+              incorrecto.parentElement.querySelector(".feedback").innerHTML =
+                "Incorrecto!";
+              document.querySelector("p.feedback").style.color = "red";
+              Contestado = 1;
+              // Crear un nuevo enlace para volver al comienzo
+              var Reset = document.createElement("a");
+              Reset.innerHTML = "Volver al comienzo";
+              Reset.setAttribute("id", "mienlace");
+              Reset.setAttribute("href", "index.html");
+              botonera.appendChild(Reset);
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <h1>ElectroTribia</h1>
+    </div>
+    <div class="container">
+      <div class="section">
+        <h2>Pregunta 1</h2>
+        <hr />
+        <h3>¿Qué es una resistencia?</h3>
+        <button class="incorrecto">Un componente que almacena energía</button>
+        <button class="incorrecto">
+          Un componente que permite el paso de corriente
+        </button>
+        <button class="correcto">
+          Un componente que resiste el flujo de corriente
+        </button>
+        <button class="incorrecto">Un componente que amplifica señales</button>
+        <button class="incorrecto">Un componente que convierte energía</button>
+        <p class="feedback"></p>
+      </div>
+    </div>
+    <div id="botonera"></div>
+  </body>
+</html>

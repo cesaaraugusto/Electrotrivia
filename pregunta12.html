@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="mm95avbq.png" />
+    <link href="styles.css" rel="stylesheet" />
+    <title>ElectroTribia | Pregunta 12</title>
+    <script>
+      // Esperar a que el contenido del DOM se cargue
+      document.addEventListener("DOMContentLoaded", function () {
+        // Variable que indica si el usuario ya ha respondido a esta pregunta
+        let Contestado = 0;
+        let miDiv = document.getElementById("miDiv");
+
+        // Obtener todos los elementos con la clase "correcto"
+        let corrects = document.querySelectorAll(".correcto");
+        // Añadir event listeners a cada botón con la clase "correcto"
+
+        // Verificar la respuesta de entrada libre
+        document.querySelectorAll(".check").forEach((checkElement) => {
+          checkElement.addEventListener("click", (e) => {
+            if (Contestado === 0) {
+              let input = document.querySelectorAll("input");
+              // Obtener el índice del botón presionado
+              let index = Array.from(
+                document.querySelectorAll(".check")
+              ).indexOf(e.target);
+
+              if (
+                index !== -1 &&
+                input[index].value.toLowerCase().trim() ===
+                  input[index].id.toLowerCase()
+              ) {
+                input[index].style.border = "2.5px solid green";
+                input[index].parentElement.querySelector(
+                  ".feedback"
+                ).innerHTML = "<span style='color: green;'>Correcto</span>";
+                Contestado = 1;
+                var Continuar = document.createElement("a");
+                Continuar.innerHTML = "Siguiente pregunta";
+                Continuar.setAttribute("id", "mienlace");
+                Continuar.setAttribute("href", "pregunta13.html");
+                botonera.appendChild(Continuar);
+              } else if (index !== -1 && input[index].value === "") {
+                input[index].parentElement.querySelector(
+                  ".feedback"
+                ).innerHTML = "<span>Ingrese una respuesta</span>";
+              } else {
+                input[index].style.border = "2.5px solid red";
+                input[index].parentElement.querySelector(
+                  ".feedback"
+                ).innerHTML =
+                  "<span style='color: red;'>Incorrecto, la respuesta es " +
+                  input[index].id +
+                  "</span>";
+                // Crear un nuevo enlace para volver al comienzo
+                var Reset = document.createElement("a");
+                Reset.innerHTML = "Volver al comienzo";
+                Reset.setAttribute("id", "mienlace");
+                Reset.setAttribute("href", "index.html");
+                botonera.appendChild(Reset);
+                Contestado = 1;
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <h1>ElectroTribia</h1>
+    </div>
+    <div class="container">
+      <div class="section">
+        <h2>Pregunta 12</h2>
+        <hr />
+        <h3>¿Qué componente se utiliza para almacenar carga eléctrica?</h3>
+        <input type="text" id="Capacitor" />
+        <button class="check" value="0">Verificar Respuesta</button>
+        <p class="feedback"></p>
+      </div>
+    </div>
+    <div id="botonera"></div>
+  </body>
+</html>
