@@ -33,7 +33,8 @@
               if (
                 index !== -1 &&
                 input[index].value.toLowerCase().trim() ===
-                  (input[index].id.toLowerCase()||"faradio")
+                  input[index].id.toLowerCase()||
+                input[index].value.toLowerCase().trim() === "faradio"
               ) {
                 input[index].style.border = "2.5px solid green";
                 input[index].parentElement.querySelector(
